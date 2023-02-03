@@ -72,6 +72,18 @@
       "@babel/plugin-proposal-optional-chaining"
     ]
   },
+  "scripts": {
+    "analyze": "webpack --mode production -p --progress --config tools/webpack.config --analyze",
+    "lint": "eslint ./src --ext .js || true",
+    "test": "jest src/",
+    "test:ci": "yarn test --coverage",
+    "start": "npm-run-all build:icons start:demo",
+    "start:demo": "cross-env NODE_ENV=development webpack-dev-server --mode development --open --config tools/webpack.config --copy",
+    "semantic-release": "semantic-release --ci --debug",
+    "travis-deploy-once": "travis-deploy-once --pro",
+    "prepush": "yarn test",
+    "defaults": "webpack-defaults"
+  },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.4.0",
