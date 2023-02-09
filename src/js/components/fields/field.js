@@ -267,7 +267,7 @@ export default class Field extends Component {
           const { target } = evt
           const { checked, type } = target
           // @todo these kind of events should be added to control definitions
-          if (['checkbox', 'radio'].includes(type)) {
+          if (['checkbox', 'radio', 'select-one'].includes(type)) {
             const optionIndex = +target.id.split('-').pop()
             // uncheck options if radio
             if (type === 'radio') {
@@ -275,7 +275,14 @@ export default class Field extends Component {
             }
 
             const checkType = type === 'checkbox' ? 'checked' : 'selected'
-            this.set(`options.${optionIndex}.${checkType}`, checked)
+            if (type === 'select-one') {
+              const options = this.get(`options`)
+              options.map(obj => {
+                obj.selected = obj.value === target.value
+              })
+            } else {
+              this.set(`options.${optionIndex}.${checkType}`, checked)
+            }
           }
         },
         click: evt => {
@@ -290,6 +297,9 @@ export default class Field extends Component {
 
           if (evt.target.contentEditable) {
             super.set('content', evt.target.innerHTML)
+            if (evt.target.type === 'textarea') {
+              super.set('content', evt.target.value)
+            }
           }
         },
       },
