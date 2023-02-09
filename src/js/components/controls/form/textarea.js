@@ -1,5 +1,6 @@
 import i18n from 'mi18n'
 import Control from '../control'
+// import Components from '../../../components/index'
 
 class TextAreaControl extends Control {
   constructor() {
@@ -36,6 +37,18 @@ class TextAreaControl extends Control {
       attrs: {
         required: false,
       },
+      // action: {
+      //   keydown: function (evt) {
+      //     const { target } = evt;
+      //     const { formData } = Components
+      //     const id = target.id.split('prev-')[1]
+      //     const field = formData.fields[id]
+      //     field.attrs.value = target.value
+      //     console.log(field)
+      //     console.log(formData)
+      //     return target.value
+      //   }
+      // },
     }
     super(textAreaConfig)
   }
