@@ -111,6 +111,23 @@ export default class Row extends Component {
       },
     }
 
+    const rowCount = {
+      tag: 'input',
+      id: `${this.id}-rowCount`,
+      attrs: {
+        type: 'number',
+        value: 0,
+        ariaLabel: i18n.get('row.settings.inputGroup.aria'),
+      },
+      action: {
+        input: ({ target: { value } }) => _this.set('config.rowCount', value),
+      },
+      config: {
+        label: 'Row Count',
+        description: i18n.get('row.makeInputGroupDesc'),
+      },
+    }
+
     // let fieldsetAddon = Object.assign({}, fieldsetLabel, {
     // content: [fieldsetInput, ' Fieldset']
     // });
@@ -157,7 +174,14 @@ export default class Row extends Component {
     }
     const columnSettingsPreset = dom.formGroup([columnSettingsPresetLabel, columnSettingsPresetSelect], 'row')
 
-    editWindow.children = [inputGroupInput, dom.create('hr'), fieldSetControls, dom.create('hr'), columnSettingsPreset]
+    editWindow.children = [
+      inputGroupInput,
+      rowCount,
+      dom.create('hr'),
+      fieldSetControls,
+      dom.create('hr'),
+      columnSettingsPreset,
+    ]
 
     return editWindow
   }
