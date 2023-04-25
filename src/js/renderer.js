@@ -108,7 +108,10 @@ export default class FormeoRenderer {
     const configConditions = [
       { condition: config.legend, result: () => ({ tag: config.fieldset ? 'legend' : 'h3', children: config.legend }) },
       { condition: true, result: () => rowData },
-      { condition: config.inputGroup, result: () => this.addButton(id, config.rowCount) },
+      {
+        condition: config.inputGroup && !config.nonDynamicInputGroup,
+        result: () => this.addButton(id, config.rowCount),
+      },
     ]
 
     const children = configConditions.reduce((acc, { condition, result }) => (condition ? [...acc, result()] : acc), [])

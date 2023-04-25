@@ -111,6 +111,23 @@ export default class Row extends Component {
       },
     }
 
+    const nonDynamicInputGroup = {
+      tag: 'input',
+      id: `${this.id}-nonDynamicInputGroup`,
+      attrs: {
+        type: 'checkbox',
+        checked: this.get('config.nonDynamicInputGroup'),
+        ariaLabel: i18n.get('row.settings.inputGroup.aria'),
+      },
+      action: {
+        click: ({ target: { checked } }) => this.set('config.nonDynamicInputGroup', checked),
+      },
+      config: {
+        label: 'Make this input group non dynamic',
+        description: i18n.get('row.makeInputGroupDesc'),
+      },
+    }
+
     const rowCount = {
       tag: 'input',
       id: `${this.id}-rowCount`,
@@ -176,6 +193,7 @@ export default class Row extends Component {
 
     editWindow.children = [
       inputGroupInput,
+      nonDynamicInputGroup,
       rowCount,
       dom.create('hr'),
       fieldSetControls,
